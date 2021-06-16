@@ -65,7 +65,7 @@ void startSDL()
     Global->renderer = NULL;
 
     /* Initialize Window */
-    if(!initSDL("Naquadah Asteroids"))
+    if(!initSDL("Harvesting"))
     {
         exit(0);
     }
