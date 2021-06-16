@@ -184,66 +184,6 @@ Object * updateFruits(Object * fruits, SDL_Texture * image)
 
     return fruitsRoot;
 }
-//
-//Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer)
-//{
-//    Object * bulletsRoot;
-//    Object * bullet;
-//    Object * previousBullet;
-//    uint8_t root = 1;
-//
-//    if(timer[BULLET_TINY_TIMER] < SDL_GetTicks())
-//    {
-//        if(Global->keystates[SDL_SCANCODE_1] || Global->keystates[SDL_SCANCODE_SPACE])
-//        {
-//            bullet = createObject(image, 0, 2, BULLET_TINY, 1, 0, 144, 16, 16, 1.0);
-//
-//            bullet->x = (basket->x + (bullet->clip.w / 2));
-//            bullet->y = (basket->y - (bullet->clip.w / 2));
-//
-//            bullet->next = bullets;
-//            bullets = bullet;
-//
-//            timer[BULLET_TINY_TIMER] = (SDL_GetTicks() + 150);
-//        }
-//    }
-//
-//    bulletsRoot = bullets;
-//
-//    while(bullets != NULL)
-//    {
-//        if(bullets->y <= Global->screenTop || bullets->lives <= 0)
-//        {
-//            bullet = bullets;
-//            bullets = bullets->next;
-//
-//            if(root)
-//            {
-//                bulletsRoot = bullets;
-//            }
-//            else
-//            {
-//                previousBullet->next = bullets;
-//            }
-//
-//            bullet->next = NULL;
-//            freeObjects(bullet);
-//            continue;
-//        }
-//
-//        previousBullet = bullets;
-//
-//        moveObject(bullets, 0, (-1 * BULLET_TINY_SPEED));
-//        bullets = bullets->next;
-//
-//        if(root)
-//        {
-//            root = 0;
-//        }
-//    }
-//
-//    return bulletsRoot;
-//}
 
 Object * updateUserBasketMovement(Object * basket)
 {
