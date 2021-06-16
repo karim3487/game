@@ -63,7 +63,7 @@ int main(int argc, char * argv[])
 
     /* Load User Objects */
     basket = createObject(spriteSheet, 0, 3, BASKET, 5, 0, 0, 32, 32, 1.0);
-    positionObject(basket, ((Global->screenWidth - Global->screenRight) / 2 + (basket->clip.w / 2)) + Global->screenLeft, ((Global->screenHeight - Global->screenTop) * 0.75 + (basket->clip.h / 2)) + Global->screenBottom);
+    positionObject(basket, ((Global->screenWidth - Global->screenRight) / 2 + (basket->clip.w / 2)) + Global->screenLeft, ((Global->screenHeight - Global->screenTop) * 0.9 + (basket->clip.h / 2)) + Global->screenBottom);
     Global->timer[BULLET_TINY_TIMER] = SDL_GetTicks();
 
     while(!Global->exit)
