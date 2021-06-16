@@ -248,7 +248,9 @@ Object * updateFruits(Object * fruits, SDL_Texture * image)
 Object * updateUserBasketMovement(Object * basket)
 {
     int8_t basketX = 0;
+    //we don't wat basket to be moving by y
     int8_t basketY = 0;
+
     int temp = 0;
 
     /* User Keyboard  */
@@ -260,16 +262,6 @@ Object * updateUserBasketMovement(Object * basket)
     if(Global->keystates[SDL_SCANCODE_RIGHT] || Global->keystates[SDL_SCANCODE_D])
     {
         basketX++;
-    }
-
-    if(Global->keystates[SDL_SCANCODE_UP] || Global->keystates[SDL_SCANCODE_W])
-    {
-        basketY--;
-    }
-
-    if(Global->keystates[SDL_SCANCODE_DOWN] || Global->keystates[SDL_SCANCODE_S])
-    {
-        basketY++;
     }
 
     /* Updating basket Animation */
@@ -287,7 +279,6 @@ Object * updateUserBasketMovement(Object * basket)
     }
 
     basketX *= BASKET_SPEED;
-    basketY *= BASKET_SPEED;
 
     /* Setting Basket Boundaries */
     if((basket->x + basketX) < Global->screenLeft)
@@ -300,18 +291,6 @@ Object * updateUserBasketMovement(Object * basket)
     {
        temp = ((Global->screenWidth - Global->screenRight) - basket->x - basket->clip.w);
         basketX = temp > 0 ? temp : 0;
-    }
-
-    if((basket->y + basketY) < Global->screenTop)
-    {
-        temp = (Global->screenTop - basket->y);
-        basketY = temp > 0 ? temp : 0;
-    }
-
-    if((basket->y + basket->clip.h + basketY) > (Global->screenHeight - Global->screenBottom))
-    {
-        temp = ((Global->screenHeight - Global->screenBottom) - basket->y - basket->clip.h);
-        basketY = temp > 0 ? temp : 0;
     }
 
     moveObject(basket, basketX, basketY);
