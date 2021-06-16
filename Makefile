@@ -20,7 +20,7 @@ ifeq ($(OS),Windows_NT)
     STD := -std=c11
 
     # Binary File
-    OBJ := star.exe
+    OBJ := harvest.exe
 
     # Library Flags
     LIBRARY := -L$(SDL_DEVELOPMENT_DIR) -Llib -Wl,-subsystem,windows -lmingw32 -lSDL2main -lSDL2
@@ -45,7 +45,7 @@ else
         STD := -std=gnu11
 
         # Binary File
-        OBJ := star
+        OBJ := harvest
 
         # Library Flags
         LIBRARY := -Wl,-rpath,@executable_path/$(SDL_DEVELOPMENT_DIR) -F$(SDL_DEVELOPMENT_DIR) -framework SDL2
@@ -66,7 +66,7 @@ else
         STD := -std=c11
 
         # Binary File
-        OBJ := star
+        OBJ := harvest
 
         # Library and C Compiler Flags
         LIBRARY := $(shell sdl2-config --libs)
