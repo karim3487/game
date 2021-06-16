@@ -97,60 +97,24 @@ void startSDL()
     score = 0;
 }
 
-void updateObjectCollision(Object ** basket, Object ** bullets, Object ** fruits)
+void updateObjectCollision(Object ** basket, Object ** fruits)
 {
     Object * fruitsRoot = *fruits;
-    Object * bulletsRoot;
 
     while(fruitsRoot != NULL)
     {
-        bulletsRoot = *bullets;
-
         if(objectCollision(fruitsRoot, *basket))
         {
+            //FIXME: here, if fruit made a collision with basket then it makes live -- in fact we need to make score ++
             (*basket)->lives--;
             fruitsRoot->lives = 0;
-        }
-
-        while(bulletsRoot != NULL)
-        {
-            if(objectCollision(fruitsRoot, bulletsRoot))
-            {
-                fruitsRoot->lives--;
-                bulletsRoot->lives = 0;
-
-                if(fruitsRoot->lives <= 0)
-                {
-                    if(fruitsRoot->type == ASTEROID_SMALL)
-                    {
-                        score += 1;
-                    }
-                    else if(fruitsRoot->type == ASTEROID_MEDIUM)
-                    {
-                        score += 2;
-                    }
-                    else if(fruitsRoot->type == ASTEROID_LARGE)
-                    {
-                        score += 3;
-                    }
-                }
-                else
-                {
-                    if(bulletsRoot->type == BULLET_TINY)
-                    {
-                        score++;
-                    }
-                }
-            }
-
-            bulletsRoot = bulletsRoot->next;
         }
 
         fruitsRoot = fruitsRoot->next;
     }
 }
 
-Object * updateAsteroids(Object * fruits, SDL_Texture * image)
+Object * updateFruits(Object * fruits, SDL_Texture * image)
 {
     Object * fruitsRoot;
     Object * fruit;
@@ -220,68 +184,68 @@ Object * updateAsteroids(Object * fruits, SDL_Texture * image)
 
     return fruitsRoot;
 }
+//
+//Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer)
+//{
+//    Object * bulletsRoot;
+//    Object * bullet;
+//    Object * previousBullet;
+//    uint8_t root = 1;
+//
+//    if(timer[BULLET_TINY_TIMER] < SDL_GetTicks())
+//    {
+//        if(Global->keystates[SDL_SCANCODE_1] || Global->keystates[SDL_SCANCODE_SPACE])
+//        {
+//            bullet = createObject(image, 0, 2, BULLET_TINY, 1, 0, 144, 16, 16, 1.0);
+//
+//            bullet->x = (basket->x + (bullet->clip.w / 2));
+//            bullet->y = (basket->y - (bullet->clip.w / 2));
+//
+//            bullet->next = bullets;
+//            bullets = bullet;
+//
+//            timer[BULLET_TINY_TIMER] = (SDL_GetTicks() + 150);
+//        }
+//    }
+//
+//    bulletsRoot = bullets;
+//
+//    while(bullets != NULL)
+//    {
+//        if(bullets->y <= Global->screenTop || bullets->lives <= 0)
+//        {
+//            bullet = bullets;
+//            bullets = bullets->next;
+//
+//            if(root)
+//            {
+//                bulletsRoot = bullets;
+//            }
+//            else
+//            {
+//                previousBullet->next = bullets;
+//            }
+//
+//            bullet->next = NULL;
+//            freeObjects(bullet);
+//            continue;
+//        }
+//
+//        previousBullet = bullets;
+//
+//        moveObject(bullets, 0, (-1 * BULLET_TINY_SPEED));
+//        bullets = bullets->next;
+//
+//        if(root)
+//        {
+//            root = 0;
+//        }
+//    }
+//
+//    return bulletsRoot;
+//}
 
-Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer)
-{
-    Object * bulletsRoot;
-    Object * bullet;
-    Object * previousBullet;
-    uint8_t root = 1;
-
-    if(timer[BULLET_TINY_TIMER] < SDL_GetTicks())
-    {
-        if(Global->keystates[SDL_SCANCODE_1] || Global->keystates[SDL_SCANCODE_SPACE])
-        {
-            bullet = createObject(image, 0, 2, BULLET_TINY, 1, 0, 144, 16, 16, 1.0);
-
-            bullet->x = (basket->x + (bullet->clip.w / 2));
-            bullet->y = (basket->y - (bullet->clip.w / 2));
-
-            bullet->next = bullets;
-            bullets = bullet;
-
-            timer[BULLET_TINY_TIMER] = (SDL_GetTicks() + 150);
-        }
-    }
-
-    bulletsRoot = bullets;
-
-    while(bullets != NULL)
-    {
-        if(bullets->y <= Global->screenTop || bullets->lives <= 0)
-        {
-            bullet = bullets;
-            bullets = bullets->next;
-
-            if(root)
-            {
-                bulletsRoot = bullets;
-            }
-            else
-            {
-                previousBullet->next = bullets;
-            }
-
-            bullet->next = NULL;
-            freeObjects(bullet);
-            continue;
-        }
-
-        previousBullet = bullets;
-
-        moveObject(bullets, 0, (-1 * BULLET_TINY_SPEED));
-        bullets = bullets->next;
-
-        if(root)
-        {
-            root = 0;
-        }
-    }
-
-    return bulletsRoot;
-}
-
-void updateUserBasketMovement(Object * basket)
+Object * updateUserBasketMovement(Object * basket)
 {
     int8_t basketX = 0;
     int8_t basketY = 0;
@@ -351,12 +315,14 @@ void updateUserBasketMovement(Object * basket)
     }
 
     moveObject(basket, basketX, basketY);
+
+    return basket;
 }
 
-Object * updateUserActions(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer)
+Object * updateUserActions(Object * basket, SDL_Texture * image, uint32_t * timer)
 {
-    updateUserBasketMovement(basket);
-    return updateUserBullets(basket, bullets, image, timer);
+    return updateUserBasketMovement(basket);
+//    return updateUserBullets(basket, bullets, image, timer);
 }
 
 void updateObjectAnimation(Object * obj)

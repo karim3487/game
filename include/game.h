@@ -23,7 +23,7 @@ void endSDL();
  * @param fruits Asteroids object to check collisions
  *
  */
-void updateObjectCollision(Object ** basket, Object ** bullets, Object ** fruits);
+void updateObjectCollision(Object ** basket, Object ** fruits);
 
 /*  
  * Update an objects subimage to the next one in the chain
@@ -44,7 +44,7 @@ void updateObjectAnimation(Object * obj);
  * @return the bullet chain updated
  *
  */
-Object * updateUserActions(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer);
+Object * updateUserActions(Object * basket, SDL_Texture * image, uint32_t * timer);
 
 /*  
  * Update the user's basket based on keyboard input
@@ -52,7 +52,7 @@ Object * updateUserActions(Object * basket, Object * bullets, SDL_Texture * imag
  * @param basket  The user basket object
  *
  */
-void updateUserBasketMovement(Object * basket);
+Object * updateUserBasketMovement(Object * basket);
 
 /*  
  * Update all the bullet objects based on user actions
@@ -65,7 +65,7 @@ void updateUserBasketMovement(Object * basket);
  * @return the bullet chain updated
  *
  */
-Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer);
+//Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * image, uint32_t * timer);
 
 /*  
  * Update the fruits object chain
@@ -76,7 +76,7 @@ Object * updateUserBullets(Object * basket, Object * bullets, SDL_Texture * imag
  * @return the fruits object chain once it's been updated
  *
  */
-Object * updateAsteroids(Object * fruits, SDL_Texture * image);
+Object * updateFruits(Object * fruits, SDL_Texture * image);
 
 /*  
  * Game setup function, setup game settings and constants and initialize SDL2
