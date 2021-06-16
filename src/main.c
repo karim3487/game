@@ -62,7 +62,7 @@ int main(int argc, char * argv[])
     fontLarge = loadTextureBack(getAbsolutePath(FONT_DIR "fontx64.bmp"), 0x0, 0x0, 0x0);
 
     /* Load User Objects */
-    basket = createObject(spriteSheet, 0, 3, BASKET, 3, 0, 0, 32, 32, 1.0);
+    basket = createObject(spriteSheet, 0, 3, BASKET, 5, 0, 0, 32, 32, 1.0);
     positionObject(basket, ((Global->screenWidth - Global->screenRight) / 2 + (basket->clip.w / 2)) + Global->screenLeft, ((Global->screenHeight - Global->screenTop) * 0.75 + (basket->clip.h / 2)) + Global->screenBottom);
     Global->timer[BULLET_TINY_TIMER] = SDL_GetTicks();
 
