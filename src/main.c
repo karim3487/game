@@ -50,10 +50,9 @@ int main(int argc, char * argv[])
 
     /* User Variables */
     Object * basket = NULL;
-    Object * bullets = NULL;
 
     /* NPC Variables */
-    Object * asteroids = NULL;
+    Object * fruits = NULL;
 
     /* Setup Pre-Game Logic and Constants */
     startSDL();
@@ -112,9 +111,9 @@ int main(int argc, char * argv[])
                 continue;
             }
 
-            bullets = updateUserActions(basket, bullets, spriteSheet, Global->timer);
-            asteroids = updateAsteroids(asteroids, spriteSheet);
-            updateObjectCollision(&basket, &bullets, &asteroids);
+            basket = updateUserActions(basket, spriteSheet, Global->timer);
+            fruits = updateFruits(fruits, spriteSheet);
+            updateObjectCollision(&basket, &fruits);
             displayHUD(basket, fontLarge, Global->timer[DISPLAY_GAME_TIMER]);
         }
         /* Game Paused */
@@ -146,8 +145,7 @@ int main(int argc, char * argv[])
     SDL_DestroyTexture(spriteSheet);
     SDL_DestroyTexture(fontLarge);
     freeObjects(basket);
-    freeObjects(asteroids);
-    freeObjects(bullets);
+    freeObjects(fruits);
 
     /* Close SDL framework */
     endSDL();
